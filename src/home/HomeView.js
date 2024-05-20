@@ -26,10 +26,18 @@ const HomeView = () => {
       xhr.onreadystatechange = function () {
           if (this.readyState == 4) {
               // alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'n  Body: '+this.responseText);
-              console.log(this.responseText);
-          }
-      };
+              // console.log(this.responseText);
+              const tmpData = this.responseText;
 
+              const jsonD = JSON.parse(tmpData)
+              
+              const data = jsonD.response.body.items.item
+              const filteredData = data.filter(item => item.category === "TMP");
+              setAllData(filteredData);
+          }
+          
+      };
+      console.log(allData)
       xhr.send('');
   }
   
