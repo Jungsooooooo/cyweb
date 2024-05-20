@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
 
+import "../css/HomeView.css"
+
 const HomeView = () => {
 
   const [allData, setAllData] = useState([]);
@@ -43,7 +45,7 @@ const HomeView = () => {
   
   return (
     <>
-      <div>home</div>
+      <div className="mainBody">home</div>
       <button onClick={getData}>test</button>
     </>
   );
