@@ -6,10 +6,12 @@
 .header{
     margin:2rem 2rem 2rem 2rem;
     font-size: 30px;
+    font-family: 'NPS';
+    color: #0080FF;
 }
 
 body{
-    font-family: 'NPS' !important
+    /* font-family: 'NPS */
 }
 
 @font-face {

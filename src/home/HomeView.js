@@ -46,8 +46,7 @@ const HomeView = () => {
   return (
     <>
       <div className="wholeLayout">
-      <header className="header">폰트가 적용이 되는 건지 안되는 건지모르겠네</header>
-        <div className="mainBody">home</div>
+      <header className="header">오늘 날씨</header>
       </div>
     </>
   );
