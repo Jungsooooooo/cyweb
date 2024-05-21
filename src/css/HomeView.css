@@ -1,4 +1,27 @@
 .mainBody{
     margin: 2rem 2rem 2rem 2rem;
-    
+    font-size: 30px;
 }
+
+.header{
+    margin:2rem 2rem 2rem 2rem;
+    font-size: 30px;
+}
+
+body{
+    font-family: 'NPS' !important
+}
+
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url("../font/KCC-Hanbit.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'NPS';
+    src: url("../font/NPSfont_extrabold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+  } 

@@ -26,7 +26,7 @@ const HomeView = () => {
       queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
       xhr.open('GET', url + queryParams);
       xhr.onreadystatechange = function () {
-          if (this.readyState == 4) {
+          if (this.readyState === 4) {
               // alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'n  Body: '+this.responseText);
               // console.log(this.responseText);
               const tmpData = this.responseText;
@@ -45,8 +45,10 @@ const HomeView = () => {
   
   return (
     <>
-      <div className="mainBody">home</div>
-      <button onClick={getData}>test</button>
+      <div className="wholeLayout">
+      <header className="header">폰트가 적용이 되는 건지 안되는 건지모르겠네</header>
+        <div className="mainBody">home</div>
+      </div>
     </>
   );
 };

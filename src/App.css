@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'KCC-Hanbit';
+  src: url("./fonts/KCC-Hanbit.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NPS';
+  src: url("./font/NPSfont_extrabold.ttf") format("ttf");
+  font-weight: 800;
+  font-style: normal;
+}
