@@ -46,7 +46,11 @@ const HomeView = () => {
   return (
     <>
       <div className="wholeLayout">
-      <header className="header">오늘 날씨</header>
+        <header className="header">오늘 날씨</header>
+        <div className="mainBody">{allData.map((data, index) => (
+            <div key={index}>{data.fcstValue}</div>
+          ))}</div>
+          <button onClick={getData}>test</button>
       </div>
     </>
   );
