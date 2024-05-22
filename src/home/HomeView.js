@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
+import { GET_VILAGE_FCST, SERVICE_KEY,GET_VILAGE_FCST_SHORT } from "../apis/ConstantsApis";
 
 import "../css/HomeView.css"
 
@@ -7,21 +7,43 @@ const HomeView = () => {
 
   const [allData, setAllData] = useState([]);
 
+  let today = new Date()
+  let nowHour = today.getHours();
+  let todayDate = today.getFullYear() + "0" + (today.getMonth()+1) + today.getDate();
   useEffect(()=>{
     getData()
   },[]);
 
   const getData = () =>{
-    console.log("data");
+    //base_time 은 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 이걸로 업데이트 됨/
+    let baseTime;
+    if( nowHour < 5 ){
+      baseTime = "0200"
+    } else if(nowHour < 8 ){
+      baseTime = "0500"
+    } else if (nowHour < 11 ){
+      baseTime = "0800"
+    } else if (nowHour < 14){
+      baseTime = "1100"
+    } else if (nowHour < 17){
+      baseTime = "1400"
+    } else if (nowHour < 20){
+      baseTime = "1700"
+    } else if (nowHour < 23){
+      baseTime = "2000"
+    } else {
+      baseTime = "2300"
+    }
+    console.log(todayDate)
+    
     var xhr = new XMLHttpRequest();
       var url = GET_VILAGE_FCST; 
       var queryParams = '?' + encodeURIComponent('serviceKey') + '='+ SERVICE_KEY;
       queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
-      queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /**/
+      queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('300'); /**/
       queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('json'); /**/
-      queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20240520'); /**/
-      queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('0500'); /**/
-      queryParams += '&' + encodeURIComponent('category') + '=' + encodeURIComponent('TMP');
+      queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(todayDate); /**/
+      queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(baseTime); /**/
       queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); /**/
       queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
       xhr.open('GET', url + queryParams);
@@ -32,7 +54,8 @@ const HomeView = () => {
               const tmpData = this.responseText;
 
               const jsonD = JSON.parse(tmpData)
-              
+              console.log(today.getHours())
+              console.log(today.getMonth()+1)
               const data = jsonD.response.body.items.item
               const filteredData = data.filter(item => item.category === "TMP");
               setAllData(filteredData);
@@ -48,7 +71,7 @@ const HomeView = () => {
       <div className="wholeLayout">
         <header className="header">오늘 날씨</header>
         <div className="mainBody">{allData.map((data, index) => (
-            <div key={index}>{data.fcstValue}</div>
+            <div key={index}>{data.fcstValue},{data.fcstTime}</div>
           ))}</div>
           <button onClick={getData}>test</button>
       </div>
