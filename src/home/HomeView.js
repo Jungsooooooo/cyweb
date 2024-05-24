@@ -34,7 +34,6 @@ const HomeView = () => {
     } else {
       baseTime = "2300"
     }
-    console.log(todayDate)
     
     var xhr = new XMLHttpRequest();
       var url = GET_VILAGE_FCST; 
@@ -54,15 +53,13 @@ const HomeView = () => {
               const tmpData = this.responseText;
 
               const jsonD = JSON.parse(tmpData)
-              console.log(today.getHours())
-              console.log(today.getMonth()+1)
               const data = jsonD.response.body.items.item
               const filteredData = data.filter(item => item.category === "TMP");
               setAllData(filteredData);
           }
           
       };
-      console.log(allData)
+      
       xhr.send('');
   }
   
@@ -71,7 +68,8 @@ const HomeView = () => {
       <div className="wholeLayout">
         <header className="header">오늘 날씨</header>
         <div className="mainBody">{allData.map((data, index) => (
-            <div key={index}>{data.fcstValue},{data.fcstTime}</div>
+          index === 0 ?
+            <div key={index} className="topWeather">{data.fcstValue},{data.fcstTime}</div>: data.fcstTime
           ))}</div>
           <button onClick={getData}>test</button>
       </div>

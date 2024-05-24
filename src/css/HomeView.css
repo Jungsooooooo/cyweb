@@ -10,8 +10,8 @@
     color: #0080FF;
 }
 
-body{
-    /* font-family: 'NPS */
+.topWeather{
+    text-align: center;
 }
 
 @font-face {
