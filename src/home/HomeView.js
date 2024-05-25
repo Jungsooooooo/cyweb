@@ -5,6 +5,7 @@ import "../css/HomeView.css";
 
 const HomeView = () => {
   const [allData, setAllData] = useState([]);
+  const [popData, setPopData] = useState([]);
 
   let today = new Date();
   let nowHour = today.getHours();
@@ -58,9 +59,12 @@ const HomeView = () => {
         //TMP = 온도
         //TMN = 최고온도
         //TMX = 최저온도
-        const filteredData = data.filter((item) => item.category === "TMP" || item.category === "POP");
+        const filteredData = data.filter((item) => item.category === "TMP");
+        const filteredDataPOP = data.filter((item) => item.category === "POP");
         console.log(filteredData);
+        setPopData(filteredDataPOP);
         setAllData(filteredData);
+        console.log(filteredDataPOP);
       }
     };
 
@@ -75,7 +79,7 @@ const HomeView = () => {
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
-                {data.fcstValue}도
+                {data.fcstValue}도<div>{data.fcstValue}</div>
               </div>
             ) : (
               data.fcstTime
