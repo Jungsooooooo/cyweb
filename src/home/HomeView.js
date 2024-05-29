@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_VILAGE_FCST, SERVICE_KEY, GET_VILAGE_FCST_SHORT } from "../apis/ConstantsApis";
-
+import sun from "../pic/sun2.png";
 import "../css/HomeView.css";
 
 const HomeView = () => {
@@ -61,10 +61,10 @@ const HomeView = () => {
         //TMX = 최저온도
         const filteredData = data.filter((item) => item.category === "TMP");
         const filteredDataPOP = data.filter((item) => item.category === "POP");
-        console.log(filteredData);
+
+        //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
         setPopData(filteredDataPOP);
         setAllData(filteredData);
-        console.log(filteredDataPOP);
       }
     };
 
@@ -79,7 +79,10 @@ const HomeView = () => {
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
-                {data.fcstValue}도<div>{data.fcstValue}</div>
+                <div>
+                  <img src={sun} />
+                </div>
+                <div className="celcius">{data.fcstValue}도</div>
               </div>
             ) : (
               data.fcstTime
