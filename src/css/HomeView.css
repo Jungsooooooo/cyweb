@@ -1,6 +1,6 @@
 .mainBody {
-  margin: 2rem 2rem 2rem 2rem;
-  font-size: 30px;
+  margin: 7rem 7rem 7rem 7rem;
+  font-size: 20px;
 }
 
 .header {
@@ -16,8 +16,8 @@
 
 .celcius {
   font-family: "NPS";
-  font-size: 20px;
-  font-weight: 200;
+  font-size: 40px;
+  font-weight: lighter;
 }
 
 @font-face {

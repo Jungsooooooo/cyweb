@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GET_VILAGE_FCST, SERVICE_KEY, GET_VILAGE_FCST_SHORT } from "../apis/ConstantsApis";
 import sun from "../pic/sun2.png";
+import cloud from "../pic/cloud.png";
 import "../css/HomeView.css";
 
 const HomeView = () => {
   const [allData, setAllData] = useState([]);
-  const [popData, setPopData] = useState([]);
+  const [skyData, setSkyData] = useState([]);
+  const [minmaxTmp, setMinMaxTmp] = useState([]);
 
   let today = new Date();
   let nowHour = today.getHours();
@@ -39,8 +41,8 @@ const HomeView = () => {
     var url = GET_VILAGE_FCST;
     var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
     queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
-    queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("300"); /**/
-    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("json"); /**/
+    queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
+    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
     queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
     queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
     queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
@@ -59,12 +61,17 @@ const HomeView = () => {
         //TMP = 온도
         //TMN = 최고온도
         //TMX = 최저온도
+        //SKY = 하늘상태
+        console.log({ data });
         const filteredData = data.filter((item) => item.category === "TMP");
-        const filteredDataPOP = data.filter((item) => item.category === "POP");
-
+        const filteredDataPOP = data.filter((item) => item.category === "SKY");
+        const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
         //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
-        setPopData(filteredDataPOP);
+
+        setSkyData(filteredDataPOP);
+
         setAllData(filteredData);
+        setMinMaxTmp(filteredDataminmaxTmp);
       }
     };
 
@@ -79,10 +86,11 @@ const HomeView = () => {
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
-                <div>
-                  <img src={sun} />
-                </div>
+                <div>{skyData[index].fcstValue === 1 ? <img src={sun} /> : <img src={cloud} />}</div>
                 <div className="celcius">{data.fcstValue}도</div>
+                <div>
+                  최저기온:{parseInt(minmaxTmp[0].fcstValue)}도 최고기온:{parseInt(minmaxTmp[1].fcstValue)}도
+                </div>
               </div>
             ) : (
               data.fcstTime
