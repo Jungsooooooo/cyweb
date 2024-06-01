@@ -11,7 +11,9 @@ const HomeView = () => {
 
   let today = new Date();
   let nowHour = today.getHours();
-  let todayDate = today.getFullYear() + "0" + (today.getMonth() + 1) + today.getDate();
+  let nowDate = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
+  let todayDate = today.getFullYear() + "0" + (today.getMonth() + 1) + nowDate;
+
   useEffect(() => {
     getData();
   }, []);
@@ -42,7 +44,7 @@ const HomeView = () => {
     var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
     queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
     queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
-    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
+    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("json"); /**/
     queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
     queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
     queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
@@ -55,6 +57,7 @@ const HomeView = () => {
         const tmpData = this.responseText;
 
         const jsonD = JSON.parse(tmpData);
+
         const data = jsonD.response.body.items.item;
 
         //POP = 강수확률
@@ -62,7 +65,7 @@ const HomeView = () => {
         //TMN = 최고온도
         //TMX = 최저온도
         //SKY = 하늘상태
-        console.log({ data });
+
         const filteredData = data.filter((item) => item.category === "TMP");
         const filteredDataPOP = data.filter((item) => item.category === "SKY");
         const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
