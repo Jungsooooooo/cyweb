@@ -100,7 +100,6 @@ const HomeView = () => {
             )
           )}
         </div>
-        <button onClick={getData}>test</button>
       </div>
     </>
   );
