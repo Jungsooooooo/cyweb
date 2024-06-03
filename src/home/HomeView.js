@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GET_VILAGE_FCST, SERVICE_KEY, GET_VILAGE_FCST_SHORT } from "../apis/ConstantsApis";
+import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
 import sun from "../pic/sun2.png";
 import cloud from "../pic/cloud.png";
 import "../css/HomeView.css";
@@ -96,7 +96,9 @@ const HomeView = () => {
                 </div>
               </div>
             ) : (
-              data.fcstTime
+              <div key={index} className="anotherweather">
+                {data.fcstTime}
+              </div>
             )
           )}
         </div>
