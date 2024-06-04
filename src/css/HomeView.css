@@ -4,6 +4,22 @@
   text-align: center;
 }
 
+.underbody {
+  margin: 7rem 7rem 7rem 7rem;
+  font-size: 20px;
+  text-align: center;
+  white-space: nowrap;
+  width: 90vw;
+  overflow: scroll; /* 내용이 넘칠 경우 스크롤바 추가 */
+  border: 1px solid #0080ff; /* 테두리 추가 */
+  box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
+  border-radius: 15px;
+}
+
+.underbody::-webkit-scrollbar {
+  display: none; /* 웹킷 브라우저에서 스크롤바 숨기기 */
+}
+
 .header {
   margin: 2rem 2em 2rem 7rem;
   font-size: 30px;
@@ -24,6 +40,9 @@
 .anotherweather {
   justify-content: center;
   display: inline-block;
+  margin-right: 1rem;
+  white-space: nowrap;
+  font-size: 20px;
 }
 
 .weatherinfo {
