@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
-import sun from "../pic/sun2.png";
+import sun2 from "../pic/sun2.png";
 import cloud from "../pic/cloud.png";
 import "../css/HomeView.css";
 
@@ -39,12 +39,13 @@ const HomeView = () => {
       baseTime = "2300";
     }
 
-    var xhr = new XMLHttpRequest();
+    setTimeout(()=>{
+      var xhr = new XMLHttpRequest();
     var url = GET_VILAGE_FCST;
     var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
     queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
     queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
-    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("json"); /**/
+    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
     queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
     queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
     queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
@@ -77,8 +78,9 @@ const HomeView = () => {
         setMinMaxTmp(filteredDataminmaxTmp);
       }
     };
-
     xhr.send("");
+    }, 100)
+    
   };
 
   return (
@@ -89,16 +91,33 @@ const HomeView = () => {
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
-                <div>{skyData[index].fcstValue === 1 ? <img src={sun} /> : <img src={cloud} />}</div>
-                <div className="celcius">{data.fcstValue}도</div>
+                <div>{skyData[index].fcstValue === "1" ? <img src={sun2} alt="" /> : <img src={cloud} alt="" />}</div>
+                <div className="celcius">{data.fcstValue}°</div>
                 <div>
-                  최저기온:{parseInt(minmaxTmp[0].fcstValue)}도 최고기온:{parseInt(minmaxTmp[1].fcstValue)}도
+                  최저기온:{parseInt(minmaxTmp[0].fcstValue)}° 최고기온:{parseInt(minmaxTmp[1].fcstValue)}°
                 </div>
               </div>
             ) : (
-              <div key={index} className="anotherweather">
-                {data.fcstTime}
+                <div></div>
+            )
+          )}
+        </div>
+        <div className="underbody">
+        {allData.map((data, index) =>
+            index === 0 ? (
+              <div key={index} className="topWeather">
+                {/* <div>{skyData[index].fcstValue === 1 ? <img src={sun} /> : <img src={cloud} />}</div>
+                <div className="celcius">{data.fcstValue}도</div>
+                <div>
+                  최저기온:{parseInt(minmaxTmp[0].fcstValue)}도 최고기온:{parseInt(minmaxTmp[1].fcstValue)}도
+                </div> */}
               </div>
+            ) : (
+              <div key={index} className="anotherweather">
+                <div>{data.fcstTime/100}시</div>
+                <div>{skyData[index].fcstValue === "1" ? <img src={sun2} width={80} alt=""/> : <img src={cloud} width={80} alt=""/>}</div>
+                <div>{data.fcstValue}°</div>
+            </div>
             )
           )}
         </div>
