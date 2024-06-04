@@ -1,5 +1,5 @@
 .mainBody {
-  margin: 7rem 7rem 7rem 7rem;
+  margin: 40px 40px 40px 40px;
   font-size: 20px;
   text-align: center;
 }
@@ -12,7 +12,7 @@ select {
 }
 
 .underbody {
-  margin: 7rem 7rem 7rem 7rem;
+  margin: 40px 40px 40px 40px;
   font-size: 20px;
   text-align: center;
   white-space: nowrap;
@@ -28,7 +28,7 @@ select {
 }
 
 .header {
-  margin: 2rem 2em 2rem 7rem;
+  margin: 2rem 2em 2rem 40px;
   font-size: 30px;
   font-family: "NPS";
   color: #0080ff;
