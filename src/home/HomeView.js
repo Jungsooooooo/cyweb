@@ -73,7 +73,7 @@ const HomeView = () => {
           const filteredData = data.filter((item) => item.category === "TMP");
           const filteredDataSKY = data.filter((item) => item.category === "SKY");
 
-          const filteredDataPOP = data.filter((item) => item.category === "SKY");
+          const filteredDataPOP = data.filter((item) => item.category === "POP");
           const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
           //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
 
@@ -81,6 +81,9 @@ const HomeView = () => {
           setPopData(filteredDataPOP);
           setAllData(filteredData);
           setMinMaxTmp(filteredDataminmaxTmp);
+
+          console.log({ skyData });
+          console.log({ popData });
         }
       };
       xhr.send("");
@@ -100,6 +103,7 @@ const HomeView = () => {
               <div key={index} className="topWeather">
                 <div>{skyData[index].fcstValue === "1" ? <img src={sun2} alt="" /> : <img src={cloud} alt="" />}</div>
                 <div className="celcius">{data.fcstValue}°</div>
+                <div className="popPercent">강수확률: {popData[index].fcstValue}%</div>
                 <div>
                   최저기온:{parseInt(minmaxTmp[0].fcstValue)}° 최고기온:{parseInt(minmaxTmp[1].fcstValue)}°
                 </div>
