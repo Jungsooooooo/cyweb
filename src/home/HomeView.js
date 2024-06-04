@@ -8,6 +8,7 @@ const HomeView = () => {
   const [allData, setAllData] = useState([]);
   const [skyData, setSkyData] = useState([]);
   const [minmaxTmp, setMinMaxTmp] = useState([]);
+  const [popData, setPopData] = useState([]);
 
   let today = new Date();
   let nowHour = today.getHours();
@@ -68,12 +69,14 @@ const HomeView = () => {
         //SKY = 하늘상태
 
         const filteredData = data.filter((item) => item.category === "TMP");
+        const filteredDataSKY = data.filter((item) => item.category === "SKY");
+
         const filteredDataPOP = data.filter((item) => item.category === "SKY");
         const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
         //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
 
-        setSkyData(filteredDataPOP);
-
+        setSkyData(filteredDataSKY);
+        setPopData(filteredDataPOP);
         setAllData(filteredData);
         setMinMaxTmp(filteredDataminmaxTmp);
       }
