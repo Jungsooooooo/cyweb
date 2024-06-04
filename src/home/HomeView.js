@@ -63,10 +63,12 @@ const HomeView = () => {
         const data = jsonD.response.body.items.item;
 
         //POP = 강수확률
+        //PTY = 강수형태
         //TMP = 온도
         //TMN = 최고온도
         //TMX = 최저온도
-        //SKY = 하늘상태
+        //REH = 습도
+        //SKY = 하늘상태 
 
         const filteredData = data.filter((item) => item.category === "TMP");
         const filteredDataSKY = data.filter((item) => item.category === "SKY");
@@ -91,6 +93,9 @@ const HomeView = () => {
       <div className="wholeLayout">
         <header className="header">오늘 날씨</header>
         <div className="mainBody">
+          <select>
+            <option>서울시</option>
+          </select>
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
