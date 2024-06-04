@@ -9,7 +9,7 @@
   font-size: 20px;
   text-align: center;
   white-space: nowrap;
-  width: 90vw;
+  
   overflow: scroll; /* 내용이 넘칠 경우 스크롤바 추가 */
   border: 1px solid #0080ff; /* 테두리 추가 */
   box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
@@ -41,7 +41,6 @@
   justify-content: center;
   display: inline-block;
   margin-right: 1rem;
-  white-space: nowrap;
   font-size: 20px;
 }
 
