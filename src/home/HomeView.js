@@ -40,52 +40,51 @@ const HomeView = () => {
       baseTime = "2300";
     }
 
-    setTimeout(()=>{
+    setTimeout(() => {
       var xhr = new XMLHttpRequest();
-    var url = GET_VILAGE_FCST;
-    var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
-    queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
-    queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
-    queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
-    queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-    queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
-    queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
-    queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent("127"); /**/
-    xhr.open("GET", url + queryParams);
-    xhr.onreadystatechange = function () {
-      if (this.readyState === 4) {
-        // alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'n  Body: '+this.responseText);
-        // console.log(this.responseText);
-        const tmpData = this.responseText;
+      var url = GET_VILAGE_FCST;
+      var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
+      queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
+      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
+      queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
+      queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
+      queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
+      queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent("127"); /**/
+      xhr.open("GET", url + queryParams);
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          // alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'n  Body: '+this.responseText);
+          // console.log(this.responseText);
+          const tmpData = this.responseText;
 
-        const jsonD = JSON.parse(tmpData);
+          const jsonD = JSON.parse(tmpData);
 
-        const data = jsonD.response.body.items.item;
+          const data = jsonD.response.body.items.item;
 
-        //POP = 강수확률
-        //PTY = 강수형태
-        //TMP = 온도
-        //TMN = 최고온도
-        //TMX = 최저온도
-        //REH = 습도
-        //SKY = 하늘상태 
+          //POP = 강수확률
+          //PTY = 강수형태
+          //TMP = 온도
+          //TMN = 최고온도
+          //TMX = 최저온도
+          //REH = 습도
+          //SKY = 하늘상태
 
-        const filteredData = data.filter((item) => item.category === "TMP");
-        const filteredDataSKY = data.filter((item) => item.category === "SKY");
+          const filteredData = data.filter((item) => item.category === "TMP");
+          const filteredDataSKY = data.filter((item) => item.category === "SKY");
 
-        const filteredDataPOP = data.filter((item) => item.category === "SKY");
-        const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
-        //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
+          const filteredDataPOP = data.filter((item) => item.category === "SKY");
+          const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
+          //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
 
-        setSkyData(filteredDataSKY);
-        setPopData(filteredDataPOP);
-        setAllData(filteredData);
-        setMinMaxTmp(filteredDataminmaxTmp);
-      }
-    };
-    xhr.send("");
-    }, 100)
-    
+          setSkyData(filteredDataSKY);
+          setPopData(filteredDataPOP);
+          setAllData(filteredData);
+          setMinMaxTmp(filteredDataminmaxTmp);
+        }
+      };
+      xhr.send("");
+    }, 100);
   };
 
   return (
@@ -106,12 +105,12 @@ const HomeView = () => {
                 </div>
               </div>
             ) : (
-                <div></div>
+              <div></div>
             )
           )}
         </div>
         <div className="underbody">
-        {allData.map((data, index) =>
+          {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
                 {/* <div>{skyData[index].fcstValue === 1 ? <img src={sun} /> : <img src={cloud} />}</div>
@@ -122,10 +121,16 @@ const HomeView = () => {
               </div>
             ) : (
               <div key={index} className="anotherweather">
-                <div>{data.fcstTime/100}시</div>
-                <div>{skyData[index].fcstValue === "1" ? <img src={sun2} width={80} alt=""/> : <img src={cloud} width={80} alt=""/>}</div>
+                <div>{data.fcstTime / 100}시</div>
+                <div>
+                  {skyData[index].fcstValue === "1" ? (
+                    <img src={sun2} width={80} alt="" />
+                  ) : (
+                    <img src={cloud} width={80} alt="" />
+                  )}
+                </div>
                 <div>{data.fcstValue}°</div>
-            </div>
+              </div>
             )
           )}
         </div>
