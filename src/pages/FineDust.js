@@ -18,12 +18,13 @@ const FineDust = () => {
     queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100"); /**/
     queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
     queryParams += "&" + encodeURIComponent("searchDate") + "=" + encodeURIComponent(todayDate); /**/
-    queryParams += "&" + encodeURIComponent("InformCode") + "=" + encodeURIComponent("PM10"); /**/
+    // queryParams += "&" + encodeURIComponent("InformCode") + "=" + encodeURIComponent("PM10"); /**/
     xhr.open("GET", url + queryParams);
     xhr.onreadystatechange = function () {
       if (this.readyState == 4) {
         const tmpData = this.responseText;
-        console.log({ tmpData });
+
+        const jsonD = JSON.parse(tmpData);
       }
     };
     xhr.send("");
