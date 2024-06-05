@@ -3,12 +3,16 @@ import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
 import sun2 from "../pic/sun2.png";
 import cloud from "../pic/cloud.png";
 import "../css/HomeView.css";
+import FineDust from "../pages/FineDust";
 
 const HomeView = () => {
   const [allData, setAllData] = useState([]);
   const [skyData, setSkyData] = useState([]);
   const [minmaxTmp, setMinMaxTmp] = useState([]);
   const [popData, setPopData] = useState([]);
+
+  const [nx, setNx] = useState("55");
+  const [ny, setNy] = useState("127");
 
   let today = new Date();
   let nowHour = today.getHours();
@@ -49,8 +53,8 @@ const HomeView = () => {
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
       queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
-      queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent("55"); /**/
-      queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent("127"); /**/
+      queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
+      queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
       xhr.open("GET", url + queryParams);
       xhr.onreadystatechange = function () {
         if (this.readyState === 4) {
@@ -83,7 +87,6 @@ const HomeView = () => {
           setMinMaxTmp(filteredDataminmaxTmp);
 
           console.log({ skyData });
-          console.log({ popData });
         }
       };
       xhr.send("");
@@ -139,6 +142,7 @@ const HomeView = () => {
           )}
         </div>
       </div>
+      <FineDust />
     </>
   );
 };
