@@ -128,12 +128,12 @@ const HomeView = () => {
               </div>
             ) : (
               <div key={index} className="anotherweather">
-                <div>{data.fcstTime / 100}시</div>
+                <div className="underhour">{data.fcstTime / 100}시</div>
                 <div>
                   {skyData[index].fcstValue === "1" ? (
-                    <img src={sun2} width={80} alt="" />
+                    <img src={sun2} width={80} height={74} alt="" />
                   ) : (
-                    <img src={cloud} width={80} alt="" />
+                    <img src={cloud} width={80} height={74} alt="" />
                   )}
                 </div>
                 <div>{data.fcstValue}°</div>
