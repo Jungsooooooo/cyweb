@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GET_VILAGE_FCST, SERVICE_KEY } from "../apis/ConstantsApis";
 import sun2 from "../pic/sun2.png";
 import cloud from "../pic/cloud.png";
+import rain from "../pic/rain.png";
 import "../css/HomeView.css";
 import FineDust from "../pages/FineDust";
 
@@ -72,7 +73,7 @@ const HomeView = () => {
           //TMN = 최고온도
           //TMX = 최저온도
           //REH = 습도
-          //SKY = 하늘상태
+          //SKY = 하늘상태 1 맑음 3 구름많음 4 흐림
 
           const filteredData = data.filter((item) => item.category === "TMP");
           const filteredDataSKY = data.filter((item) => item.category === "SKY");
@@ -104,7 +105,15 @@ const HomeView = () => {
           {allData.map((data, index) =>
             index === 0 ? (
               <div key={index} className="topWeather">
-                <div>{skyData[index].fcstValue === "1" ? <img src={sun2} alt="" /> : <img src={cloud} alt="" />}</div>
+                <div>
+                  {skyData[index].fcstValue === "1" ? (
+                    <img src={sun2} alt="" />
+                  ) : skyData[index].fcstValue === "4" && popData[index].fcstValue >= 50 ? (
+                    <img src={rain} alt="" />
+                  ) : (
+                    <img src={cloud} alt="" />
+                  )}
+                </div>
                 <div className="celcius">{data.fcstValue}°</div>
                 <div className="popPercent">강수확률: {popData[index].fcstValue}%</div>
                 <div>
@@ -132,6 +141,8 @@ const HomeView = () => {
                 <div>
                   {skyData[index].fcstValue === "1" ? (
                     <img src={sun2} width={80} height={74} alt="" />
+                  ) : skyData[index].fcstValue === "4" && popData[index].fcstValue >= 50 ? (
+                    <img src={rain} width={80} height={74} alt="" />
                   ) : (
                     <img src={cloud} width={80} height={74} alt="" />
                   )}
