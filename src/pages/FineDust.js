@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { SERVICE_KEY_FINEDUST } from "../apis/ConstantsApis";
 
+import "../css/FineDust.css";
+
 const FineDust = () => {
   let today = new Date();
   let nowDate = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
@@ -25,11 +27,16 @@ const FineDust = () => {
         const tmpData = this.responseText;
 
         const jsonD = JSON.parse(tmpData);
+        console.log({ jsonD });
       }
     };
     xhr.send("");
   };
-  return <div>fineDust</div>;
+  return (
+    <>
+      <div className="finemain">fineDust</div>
+    </>
+  );
 };
 
 export default FineDust;
