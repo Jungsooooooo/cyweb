@@ -45,12 +45,20 @@ const FineDust = () => {
     queryParams += "&" + encodeURIComponent("dataTerm") + "=" + encodeURIComponent("DAILY");
     queryParams += "&" + encodeURIComponent("ver") + "=" + encodeURIComponent("1.0");
     xhr.open("GET", url + queryParams);
+    //     PM10 (미세먼지) 좋음: 0~30 µg/m³ 보통: 31~80 µg/m³ 나쁨: 81~150 µg/m³ 매우 나쁨: 151 µg/m³ 이상
+    //     PM2.5 (초미세먼지) 좋음: 0~15 µg/m³ 보통: 16~35 µg/m³ 나쁨: 36~75 µg/m³ 매우 나쁨: 76 µg/m³ 이상
+    //     khaivalue = 통합대기환경수치
+    //     좋음 (CAI 0~50)
+    //     보통 (CAI 51~100)
+    //     나쁨 (CAI 101~250)
+    //     매우 나쁨 (CAI 251 이상)
     xhr.onreadystatechange = function () {
       if (this.readyState === 4) {
         const tmpData = this.responseText;
         const AjsonD = JSON.parse(tmpData);
         console.log({ AjsonD });
-        setValue(30);
+        // setValue(AjsonD.response.body.items[0].khaiValue);
+        setValue(224);
       }
     };
     xhr.send("");
