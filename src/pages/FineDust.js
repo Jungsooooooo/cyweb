@@ -57,20 +57,26 @@ const FineDust = () => {
         const tmpData = this.responseText;
         const AjsonD = JSON.parse(tmpData);
         console.log({ AjsonD });
-        // setValue(AjsonD.response.body.items[0].khaiValue);
-        setValue(224);
+        setValue(AjsonD.response.body.items[4].khaiValue);
+        // setValue(250);
       }
     };
     xhr.send("");
   };
 
   return (
-    <div className="finemain">
-      <h1>Fill Rectangle</h1>
-      <div className="rectangle">
-        <div className="fill" style={{ width: `${value}%` }}></div>
+    <>
+      <div className="finemain">
+        <div>
+          <h1>대기질</h1>
+          <h2>{value}</h2>
+        </div>
+        <div className="rectangle">
+          <div className="fill"></div>
+          <div className="indicator" style={{ left: `${(value / 300) * 100}%` }}></div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
