@@ -152,8 +152,8 @@ const HomeView = () => {
             )
           )}
         </div>
+        <FineDust />
       </div>
-      <FineDust />
     </>
   );
 };

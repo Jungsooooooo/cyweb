@@ -1,16 +1,47 @@
 .finemain {
   margin: 100px 300px 0px 300px;
+  white-space: nowrap;
 }
 
 .rectangle {
   width: 100%;
-  max-width: 500px;
-  height: 30px;
+  height: 10px;
+  position: relative;
   background-color: white;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fill {
+  position: absolute; /* 추가 */
+  height: 70%;
+  width: 100%;
+  max-width: 123vh;
   height: 100%;
-  background-color: #3b82f6;
-  transition: width 0.3s ease;
+  border-radius: 15px;
+  background: linear-gradient(
+    to right,
+    blue 0%,
+    blue 15%,
+    green 25%,
+    green 35%,
+    yellow 45%,
+    yellow 55%,
+    orange 65%,
+    orange 75%,
+    red 85%,
+    darkred 100%
+  ); /* 색상 그라데이션 */
+}
+
+.indicator {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: white; /* 점색깔을 하얀색으로 설정 */
+  border-radius: 50%;
+  border: 2px solid #333; /* 테두리를 회색(거멓게)로 설정 */
 }
