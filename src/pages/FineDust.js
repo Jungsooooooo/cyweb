@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ResponsiveBullet } from "@nivo/bullet";
 import "../css/FineDust.css";
 import { SERVICE_KEY_FINEDUST } from "../apis/ConstantsApis";
 
