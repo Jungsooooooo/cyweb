@@ -116,7 +116,7 @@ const HomeView = () => {
                 </div>
                 <div className="celcius">{data.fcstValue}°</div>
                 <div className="popPercent">강수확률: {popData[index].fcstValue}%</div>
-                <div>
+                <div className="minmaxtemp">
                   최저기온:{parseInt(minmaxTmp[0].fcstValue)}° 최고기온:{parseInt(minmaxTmp[1].fcstValue)}°
                 </div>
               </div>

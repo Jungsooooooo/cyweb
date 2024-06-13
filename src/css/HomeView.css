@@ -1,11 +1,18 @@
 .mainBody {
-  margin: 40px 40px 40px 40px;
   font-size: 20px;
   text-align: center;
 }
 
 .popPercent {
   font-size: 15px;
+}
+
+.minmaxtemp {
+  margin-bottom: 40px;
+}
+
+.wholeLayout {
+  margin: 2.5em 18.75em 2.5em 18.75em;
 }
 
 select {
@@ -16,11 +23,11 @@ select {
 }
 
 .underbody {
-  margin: 0px 300px 0px 300px;
+  /* margin: 0px 18.75em 0px 18.75em; */
   font-size: 20px;
   text-align: center;
   white-space: nowrap;
-
+  margin-bottom: 40px;
   overflow: scroll;
   border: 1px solid whitesmoke;
   box-sizing: border-box;
@@ -32,7 +39,7 @@ select {
 }
 
 .header {
-  margin: 40px 40px 40px 300px;
+  margin-bottom: 40px;
   font-size: 30px;
   font-family: "NPS";
   color: #0080ff;
@@ -71,4 +78,10 @@ select {
   src: url("../font/NPSfont_extrabold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
+}
+
+@media (max-width: 900px) {
+  .wholeLayout {
+    margin: 2em 1em 2em 1em; /* 모바일 화면에서의 마진 조정 */
+  }
 }

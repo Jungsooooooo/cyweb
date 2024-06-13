@@ -1,5 +1,5 @@
 .finemain {
-  margin: 100px 300px 0px 300px;
+  /* margin: 6.25em 18.75em 0px 18.75em; */
   white-space: nowrap;
 }
 
@@ -14,10 +14,9 @@
 }
 
 .fill {
-  position: absolute; /* 추가 */
+  position: relative; /* 추가 */
   height: 70%;
   width: 100%;
-  max-width: 123vh;
   height: 100%;
   border-radius: 15px;
   background: linear-gradient(
