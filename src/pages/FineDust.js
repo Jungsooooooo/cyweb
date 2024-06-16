@@ -56,8 +56,8 @@ const FineDust = () => {
         const tmpData = this.responseText;
         const AjsonD = JSON.parse(tmpData);
         console.log({ AjsonD });
-        // setValue(AjsonD.response.body.items[0].khaiValue);
-        setValue(100);
+        setValue(AjsonD.response.body.items[0].khaiValue);
+        // setValue(AjsonD.response.body.items[]);
       }
     };
     xhr.send("");
