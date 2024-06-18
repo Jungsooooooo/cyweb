@@ -6,8 +6,11 @@ const FineDust = () => {
   const today = new Date();
   const nowDate = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
   const todayDate = `${today.getFullYear()}-0${today.getMonth() + 1}-${nowDate}`;
-  console.log(todayDate);
+
   const [value, setValue] = useState(0);
+  const [valueGrade, setValueGrade] = useState("");
+  const [pm10, setPm10] = useState(0);
+  const [pm2, setPm2] = useState(0);
 
   useEffect(() => {
     getFineData();
@@ -57,7 +60,17 @@ const FineDust = () => {
         const AjsonD = JSON.parse(tmpData);
         console.log({ AjsonD });
         setValue(AjsonD.response.body.items[0].khaiValue);
+
         // setValue(AjsonD.response.body.items[]);
+        if (AjsonD.response.body.items[0].khaiGrade === 1) {
+          setValueGrade("좋음");
+        } else if (AjsonD.response.body.items[0].khaiGrade === 2) {
+          setValueGrade("보통");
+        } else if (AjsonD.response.body.items[0].khaiGrade === 3) {
+          setValueGrade("나쁨");
+        } else {
+          setValueGrade("매우 나쁨");
+        }
       }
     };
     xhr.send("");
@@ -68,7 +81,9 @@ const FineDust = () => {
       <div className="finemain">
         <div>
           <h1>대기질</h1>
-          <h2>{value}</h2>
+          <h2>
+            {value} - {valueGrade}
+          </h2>
         </div>
         <div className="rectangle">
           <div className="fill"></div>
