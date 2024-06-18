@@ -60,7 +60,8 @@ const FineDust = () => {
         const AjsonD = JSON.parse(tmpData);
         console.log({ AjsonD });
         setValue(AjsonD.response.body.items[0].khaiValue);
-
+        setPm10(AjsonD.response.body.items[0].pm10Value);
+        setPm2(AjsonD.response.body.items[0].pm25Value);
         // setValue(AjsonD.response.body.items[]);
         if (AjsonD.response.body.items[0].khaiGrade === 1) {
           setValueGrade("좋음");
