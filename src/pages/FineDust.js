@@ -63,13 +63,13 @@ const FineDust = () => {
         setPm10(AjsonD.response.body.items[0].pm10Value);
         setPm2(AjsonD.response.body.items[0].pm25Value);
         // setValue(AjsonD.response.body.items[]);
-        if (AjsonD.response.body.items[0].khaiGrade === 1) {
+        if (AjsonD.response.body.items[0].khaiGrade === "1") {
           setValueGrade("좋음");
-        } else if (AjsonD.response.body.items[0].khaiGrade === 2) {
+        } else if (AjsonD.response.body.items[0].khaiGrade === "2") {
           setValueGrade("보통");
-        } else if (AjsonD.response.body.items[0].khaiGrade === 3) {
+        } else if (AjsonD.response.body.items[0].khaiGrade === "3") {
           setValueGrade("나쁨");
-        } else {
+        } else if (AjsonD.response.body.items[0].khaiGrade === "4") {
           setValueGrade("매우 나쁨");
         }
       }
