@@ -90,6 +90,10 @@ const FineDust = () => {
           <div className="fill"></div>
           <div className="indicator" style={{ left: `${(value / 300) * 100}%` }}></div>
         </div>
+        <div className="">
+          <div className="inline-block">test</div>
+          <div className="inline-block">test</div>
+        </div>
       </div>
     </>
   );

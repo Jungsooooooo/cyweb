@@ -44,3 +44,11 @@
   border-radius: 50%;
   border: 2px solid #333; /* 테두리를 회색(거멓게)로 설정 */
 }
+
+.inline-block {
+  display: inline-block;
+  width: 45%; /* 너비를 적절히 조정하세요 */
+  margin-right: 5%; /* 마진을 적절히 조정하세요 */
+  vertical-align: top; /* 세로 정렬 */
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 너비를 계산 */
+}
