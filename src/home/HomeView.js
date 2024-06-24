@@ -53,7 +53,7 @@ const HomeView = () => {
       queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
       queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
       queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
       xhr.open("GET", url + queryParams);
