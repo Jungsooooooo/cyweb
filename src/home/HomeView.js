@@ -11,7 +11,7 @@ const HomeView = () => {
   const [skyData, setSkyData] = useState([]);
   const [minmaxTmp, setMinMaxTmp] = useState([]);
   const [popData, setPopData] = useState([]);
-
+  const [minTmp, setMinTmp] = useState([]);
   const [nx, setNx] = useState("55");
   const [ny, setNy] = useState("127");
 
@@ -50,10 +50,10 @@ const HomeView = () => {
       var url = GET_VILAGE_FCST;
       var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
       queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
-      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
+      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("3000"); /**/
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
       queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
       queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
       xhr.open("GET", url + queryParams);
@@ -87,7 +87,10 @@ const HomeView = () => {
           setAllData(filteredData);
           setMinMaxTmp(filteredDataminmaxTmp);
 
-          console.log({ skyData });
+          if (baseTime === "0200") {
+            localStorage.setItem("mintemp", filteredDataminmaxTmp[0].fcstValue);
+          }
+          console.log(localStorage.getItem("mintemp"));
         }
       };
       xhr.send("");
@@ -117,7 +120,8 @@ const HomeView = () => {
                 <div className="celcius">{data.fcstValue}°</div>
                 <div className="popPercent">강수확률: {popData[index].fcstValue}%</div>
                 <div className="minmaxtemp">
-                  최저기온:{parseInt(minmaxTmp[0].fcstValue)}° 최고기온:{parseInt(minmaxTmp[1].fcstValue)}°
+                  최저기온:{parseInt(localStorage.getItem("mintemp"))}° 최고기온:
+                  {parseInt(minmaxTmp[1].fcstValue)}°
                 </div>
               </div>
             ) : (
