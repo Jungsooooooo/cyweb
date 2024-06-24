@@ -62,15 +62,31 @@ const FineDust = () => {
         setValue(AjsonD.response.body.items[0].khaiValue);
         setPm10(AjsonD.response.body.items[0].pm10Value);
         setPm2(AjsonD.response.body.items[0].pm25Value);
-        // setValue(AjsonD.response.body.items[]);
-        if (AjsonD.response.body.items[0].khaiGrade === "1") {
-          setValueGrade("좋음");
-        } else if (AjsonD.response.body.items[0].khaiGrade === "2") {
-          setValueGrade("보통");
-        } else if (AjsonD.response.body.items[0].khaiGrade === "3") {
-          setValueGrade("나쁨");
-        } else if (AjsonD.response.body.items[0].khaiGrade === "4") {
-          setValueGrade("매우 나쁨");
+
+        if (AjsonD.response.body.items[0].khaiValue === "-") {
+          const newAirData = AjsonD.response.body.items.filter((data) => data.khaiValue !== "-");
+          setValue(newAirData[0].khaiValue);
+          // setValue(AjsonD.response.body.items[]);
+          if (newAirData[0].khaiGrade === "1") {
+            setValueGrade("좋음");
+          } else if (newAirData[0].khaiGrade === "2") {
+            setValueGrade("보통");
+          } else if (newAirData[0].khaiGrade === "3") {
+            setValueGrade("나쁨");
+          } else if (newAirData[0].khaiGrade === "4") {
+            setValueGrade("매우 나쁨");
+          }
+        } else {
+          // setValue(AjsonD.response.body.items[]);
+          if (AjsonD.response.body.items[0].khaiGrade === "1") {
+            setValueGrade("좋음");
+          } else if (AjsonD.response.body.items[0].khaiGrade === "2") {
+            setValueGrade("보통");
+          } else if (AjsonD.response.body.items[0].khaiGrade === "3") {
+            setValueGrade("나쁨");
+          } else if (AjsonD.response.body.items[0].khaiGrade === "4") {
+            setValueGrade("매우 나쁨");
+          }
         }
       }
     };
