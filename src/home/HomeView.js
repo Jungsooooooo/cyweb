@@ -9,7 +9,7 @@ import FineDust from "../pages/FineDust";
 const HomeView = () => {
   const [allData, setAllData] = useState([]);
   const [skyData, setSkyData] = useState([]);
-  const [minmaxTmp, setMinMaxTmp] = useState([]);
+  const [maxTmp, setMaxTmp] = useState([]);
   const [popData, setPopData] = useState([]);
   const [minTmp, setMinTmp] = useState([]);
   const [nx, setNx] = useState("55");
@@ -50,7 +50,7 @@ const HomeView = () => {
       var url = GET_VILAGE_FCST;
       var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
       queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
-      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("3000"); /**/
+      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
       queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
@@ -79,19 +79,22 @@ const HomeView = () => {
           const filteredDataSKY = data.filter((item) => item.category === "SKY");
 
           const filteredDataPOP = data.filter((item) => item.category === "POP");
-          const filteredDataminmaxTmp = data.filter((item) => item.category === "TMN" || item.category === "TMX");
+          console.log(todayDate);
+          const filteredDataminmaxTmp = data.filter(
+            (item) => item.category === "TMN" || (item.category === "TMX" && item.fcstDate === todayDate)
+          );
           //catergory를 조건문으로 줘서 데이터 추출 할 수 있도록
-
           setSkyData(filteredDataSKY);
           setPopData(filteredDataPOP);
           setAllData(filteredData);
-          setMinMaxTmp(filteredDataminmaxTmp);
-
+          console.log({ filteredDataminmaxTmp });
           if (baseTime === "0200") {
             localStorage.setItem("mintemp", filteredDataminmaxTmp[0].fcstValue);
+            console.log(filteredDataminmaxTmp[1].fcstValue);
+            localStorage.setItem("maxtemp", filteredDataminmaxTmp[1].fcstValue);
           }
-          console.log(localStorage.getItem("mintemp"));
         }
+        console.log(localStorage.getItem("mintemp"));
       };
       xhr.send("");
     }, 100);
@@ -121,7 +124,7 @@ const HomeView = () => {
                 <div className="popPercent">강수확률: {popData[index].fcstValue}%</div>
                 <div className="minmaxtemp">
                   최저기온:{parseInt(localStorage.getItem("mintemp"))}° 최고기온:
-                  {parseInt(minmaxTmp[1].fcstValue)}°
+                  {parseInt(localStorage.getItem("maxtemp"))}°
                 </div>
               </div>
             ) : (
