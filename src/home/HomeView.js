@@ -79,7 +79,7 @@ const HomeView = () => {
           const filteredDataSKY = data.filter((item) => item.category === "SKY");
 
           const filteredDataPOP = data.filter((item) => item.category === "POP");
-          console.log(todayDate);
+
           const filteredDataminmaxTmp = data.filter(
             (item) => item.category === "TMN" || (item.category === "TMX" && item.fcstDate === todayDate)
           );
@@ -87,14 +87,13 @@ const HomeView = () => {
           setSkyData(filteredDataSKY);
           setPopData(filteredDataPOP);
           setAllData(filteredData);
-          console.log({ filteredDataminmaxTmp });
+
           if (baseTime === "0200") {
             localStorage.setItem("mintemp", filteredDataminmaxTmp[0].fcstValue);
-            console.log(filteredDataminmaxTmp[1].fcstValue);
+
             localStorage.setItem("maxtemp", filteredDataminmaxTmp[1].fcstValue);
           }
         }
-        console.log(localStorage.getItem("mintemp"));
       };
       xhr.send("");
     }, 100);
