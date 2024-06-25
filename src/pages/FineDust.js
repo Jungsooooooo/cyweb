@@ -38,7 +38,7 @@ const FineDust = () => {
 
   const getFineData2 = () => {
     var xhr = new XMLHttpRequest();
-    var url = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty";
+    var url = "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty";
     var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY_FINEDUST;
     queryParams += "&" + encodeURIComponent("returnType") + "=" + encodeURIComponent("json");
     queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100");
@@ -106,10 +106,10 @@ const FineDust = () => {
           <div className="fill"></div>
           <div className="indicator" style={{ left: `${(value / 300) * 100}%` }}></div>
         </div>
-        <div className="">
+        {/* <div className="">
           <div className="inline-block">test</div>
           <div className="inline-block">test</div>
-        </div>
+        </div> */}
       </div>
     </>
   );

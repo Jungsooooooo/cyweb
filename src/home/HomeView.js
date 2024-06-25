@@ -10,7 +10,7 @@ import Temp from "../pages/Temp";
 const HomeView = () => {
   return (
     <>
-      <div>
+      <div className="wholeLayout">
         <Temp />
         <FineDust />
       </div>
