@@ -27,7 +27,10 @@ const Temp = () => {
   const getData = () => {
     //base_time 은 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 이걸로 업데이트 됨/
     let baseTime;
-    if (nowHour < 5) {
+    if (nowHour === 0 || nowHour === 1) {
+      baseTime = "2300";
+      todayDate = todayDate - 1;
+    } else if (nowHour < 5) {
       baseTime = "0200";
     } else if (nowHour < 8) {
       baseTime = "0500";
@@ -53,10 +56,11 @@ const Temp = () => {
       queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
       queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
       queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
       xhr.open("GET", url + queryParams);
+      console.log({ baseTime });
       xhr.onreadystatechange = function () {
         if (this.readyState === 4) {
           // alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'n  Body: '+this.responseText);
@@ -98,7 +102,7 @@ const Temp = () => {
       xhr.send("");
     }, 100);
 
-    if (localStorage.getItem("mintemp") === null) {
+    if (localStorage.getItem("mintemp") === null || localStorage.getItem("maxtemp") === null) {
       setTimeout(() => {
         var xhr = new XMLHttpRequest();
         var url = GET_VILAGE_FCST;
@@ -107,7 +111,7 @@ const Temp = () => {
         queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
         queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
         queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-        queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
+        queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
         queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
         queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
         xhr.open("GET", url + queryParams);
@@ -129,7 +133,7 @@ const Temp = () => {
           }
         };
         xhr.send("");
-      }, 100);
+      }, 200);
     }
   };
 
