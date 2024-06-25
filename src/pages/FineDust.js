@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../css/FineDust.css";
-import { SERVICE_KEY_FINEDUST } from "../apis/ConstantsApis";
+import { SERVICE_KEY_FINEDUST, GET_DUST } from "../apis/ConstantsApis";
 
 const FineDust = () => {
   const today = new Date();
@@ -19,7 +19,7 @@ const FineDust = () => {
 
   const getFineData = () => {
     var xhr = new XMLHttpRequest();
-    var url = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth";
+    var url = GET_DUST;
     var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY_FINEDUST;
     queryParams += "&" + encodeURIComponent("returnType") + "=" + encodeURIComponent("json");
     queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100");
