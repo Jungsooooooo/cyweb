@@ -56,7 +56,7 @@ const Temp = () => {
       queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
       queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
       queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent(baseTime); /**/
       queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
       queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
       xhr.open("GET", url + queryParams);
@@ -102,39 +102,37 @@ const Temp = () => {
       xhr.send("");
     }, 100);
 
-    if (localStorage.getItem("mintemp") === null || localStorage.getItem("maxtemp") === null) {
-      setTimeout(() => {
-        var xhr = new XMLHttpRequest();
-        var url = GET_VILAGE_FCST;
-        var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
-        queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
-        queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
-        queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
-        queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
-        queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
-        queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
-        queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
-        xhr.open("GET", url + queryParams);
-        xhr.onreadystatechange = function () {
-          if (this.readyState === 4) {
-            const tmpData = this.responseText;
+    setTimeout(() => {
+      var xhr = new XMLHttpRequest();
+      var url = GET_VILAGE_FCST;
+      var queryParams = "?" + encodeURIComponent("serviceKey") + "=" + SERVICE_KEY;
+      queryParams += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
+      queryParams += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("350"); /**/
+      queryParams += "&" + encodeURIComponent("dataType") + "=" + encodeURIComponent("JSON"); /**/
+      queryParams += "&" + encodeURIComponent("base_date") + "=" + encodeURIComponent(todayDate); /**/
+      queryParams += "&" + encodeURIComponent("base_time") + "=" + encodeURIComponent("0200"); /**/
+      queryParams += "&" + encodeURIComponent("nx") + "=" + encodeURIComponent(nx); /**/
+      queryParams += "&" + encodeURIComponent("ny") + "=" + encodeURIComponent(ny); /**/
+      xhr.open("GET", url + queryParams);
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          const tmpData = this.responseText;
 
-            const jsonD = JSON.parse(tmpData);
+          const jsonD = JSON.parse(tmpData);
 
-            const data = jsonD.response.body.items.item;
+          const data = jsonD.response.body.items.item;
 
-            const filteredDataminmaxTmp = data.filter(
-              (item) => item.category === "TMN" || (item.category === "TMX" && item.fcstDate === todayDate)
-            );
+          const filteredDataminmaxTmp = data.filter(
+            (item) => item.category === "TMN" || (item.category === "TMX" && item.fcstDate === todayDate)
+          );
 
-            localStorage.setItem("mintemp", filteredDataminmaxTmp[0].fcstValue);
+          localStorage.setItem("mintemp", filteredDataminmaxTmp[0].fcstValue);
 
-            localStorage.setItem("maxtemp", filteredDataminmaxTmp[1].fcstValue);
-          }
-        };
-        xhr.send("");
-      }, 200);
-    }
+          localStorage.setItem("maxtemp", filteredDataminmaxTmp[1].fcstValue);
+        }
+      };
+      xhr.send("");
+    }, 100);
   };
 
   return (
