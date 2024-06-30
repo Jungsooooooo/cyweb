@@ -106,10 +106,10 @@ const FineDust = () => {
           <div className="fill"></div>
           <div className="indicator" style={{ left: `${(value / 300) * 100}%` }}></div>
         </div>
-        {/* <div className="">
-          <div className="inline-block">test</div>
-          <div className="inline-block">test</div>
-        </div> */}
+        <div>
+          <div className="inline-block">미세먼지: {pm10}</div>
+          <div className="inline-block">초미세먼지: {pm2}</div>
+        </div>
       </div>
     </>
   );
